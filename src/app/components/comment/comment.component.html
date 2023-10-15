@@ -8,7 +8,7 @@
   <div class="sm:flex sm:justify-between sm:gap-4">
     <div>
       <h3 class="text-lg font-bold text-gray-900 sm:text-xl">
-       {{comment.user.name}}
+        {{ comment.user.name }}
       </h3>
     </div>
 
@@ -23,7 +23,7 @@
 
   <div class="mt-4">
     <p class="text-sm text-gray-500">
-  {{comment.text}}
+      {{ comment.text }}
     </p>
   </div>
 
@@ -40,7 +40,7 @@
     <button
       (click)="toggleExpanded()"
       class="duration-200"
-      [class.rotate-180]="isExpanded"
+      [class.rotate-180]="isExpanded()"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -58,16 +58,14 @@
       </svg>
     </button>
   </dl>
-  <section class="my-4" *ngIf="isReplying">
-
-      <app-comment-form></app-comment-form>
-
+  <section class="my-4" *ngIf="isReplying()">
+    <app-comment-form></app-comment-form>
   </section>
-  <section class="nested-comments" *ngIf="isExpanded">
-
-      <!-- This shows nested comments -->
-      <app-comment></app-comment>
-      <app-comment></app-comment>
-
+  <section class="nested-comments" *ngIf="isExpanded()">
+    <!-- This shows nested comments -->
+    <app-comment
+      [comment]="nestedComment"
+      *ngFor="let nestedComment of nestedComments()"
+    ></app-comment>
   </section>
 </article>
