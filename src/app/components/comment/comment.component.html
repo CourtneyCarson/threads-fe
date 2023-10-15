@@ -1,0 +1,68 @@
+<article
+  class="shadow-md relative block overflow-hidden rounded-lg border border-gray-200 p-4 sm:p-6 lg:p-8"
+>
+  <span
+    class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"
+  ></span>
+
+  <div class="sm:flex sm:justify-between sm:gap-4">
+    <div>
+      <h3 class="text-lg font-bold text-gray-900 sm:text-xl">
+        Building a SaaS product as a software developer
+      </h3>
+    </div>
+
+    <div class="hidden sm:block sm:shrink-0">
+      <!-- <img
+        alt="Paul Clapton"
+        src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
+        class="h-16 w-16 rounded-lg object-cover shadow-sm"
+      /> -->
+    </div>
+  </div>
+
+  <div class="mt-4">
+    <p class="text-sm text-gray-500">
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. At velit illum
+      provident a, ipsa maiores deleniti consectetur nobis et eaque.
+    </p>
+  </div>
+
+  <dl class="mt-6 flex justify-end gap-4 sm:gap-6">
+    <button
+      (click)="toggleReplying()"
+      class="inline-block rounded border border-current px-4 py-1.5 text-sm font-medium text-indigo-600 transition hover:rotate-2 hover:scale-110 focus:outline-none focus:ring active:text-indigo-500"
+    >
+      Reply
+    </button>
+    <button>12 Likes</button>
+
+    <!-- expand/collapse -->
+    <button
+      (click)="toggleExpanded()"
+      class="duration-200"
+      [class.rotate-180]="isExpanded"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+        />
+      </svg>
+    </button>
+  </dl>
+  <section class="nested-comments" *ngIf="isReplying">
+    <div class="text-xl">This is where you reply, will show form</div>
+  </section>
+  <section class="nested-comments" *ngIf="isExpanded">
+    <div class="text-xl">This shows nested comments</div>
+  </section>
+</article>
