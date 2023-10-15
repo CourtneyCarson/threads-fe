@@ -1,5 +1,4 @@
 <section class="max-w-md mx-auto flex flex-col gap-4">
-<app-comment></app-comment>
-<app-comment></app-comment>
-<app-comment></app-comment>
+  <!-- to connect to a signal must use comments() -->
+  <app-comment [comment]="comment"  *ngFor="let comment of comments()"></app-comment>
 </section>

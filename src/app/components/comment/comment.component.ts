@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CommentFormComponent } from '../comment-form/comment-form.component';
+import { Comment } from 'src/app/interfaces/comment.interface';
 
 @Component({
   selector: 'app-comment',
@@ -10,6 +11,8 @@ import { CommentFormComponent } from '../comment-form/comment-form.component';
   styleUrls: ['./comment.component.scss'],
 })
 export class CommentComponent {
+  @Input() comment!: Comment;
+
   isExpanded = false;
   isReplying = false;
 
