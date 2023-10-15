@@ -59,10 +59,16 @@
       </svg>
     </button>
   </dl>
-  <section class="nested-comments" *ngIf="isReplying">
-    <div class="text-xl">This is where you reply, will show form</div>
+  <section class="my-4" *ngIf="isReplying">
+
+      <app-comment-form></app-comment-form>
+
   </section>
   <section class="nested-comments" *ngIf="isExpanded">
-    <div class="text-xl">This shows nested comments</div>
+
+      <!-- This shows nested comments -->
+      <app-comment></app-comment>
+      <app-comment></app-comment>
+
   </section>
 </article>
