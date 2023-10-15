@@ -1,11 +1,19 @@
-<form>
+
+
+<form class="flex flex-col items-end gap-4" (submit)="formSubmit($event)">
   <textarea
-    name=""
+    name="commentText"
     id=""
     rows="3"
     class="w-full px-3 py-1.5 border border-slate-900 rounded-md"
-    placeholder="write a comment..."
+    [placeholder]="placeholder"
   ></textarea>
+  <button
+    type="submit"
+    class="inline-block rounded border border-current px-4 py-1.5 text-sm font-medium text-indigo-600 transition hover:rotate-2 hover:scale-110 focus:outline-none focus:ring active:text-indigo-500"
+  >
+    {{ buttonText }}
+  </button>
 </form>
 
 <!-- button and text input  -->

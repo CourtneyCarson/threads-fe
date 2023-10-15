@@ -3,6 +3,12 @@ import { Injectable, inject } from '@angular/core';
 import { enviornment } from '../enviornment';
 import { Comment } from '../interfaces/comment.interface';
 
+type CreateCommentDto = {
+  parentId?: string;
+  text: string;
+  userId: string;
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -19,4 +25,12 @@ export class CommentService {
   }
 
   // get
+  
+  // create comment
+  createComment(params: CreateCommentDto) {
+    return this.http.post<Comment>(
+      `${enviornment.apiBaseUrl}/comments`,
+      params
+    );
+  }
 }

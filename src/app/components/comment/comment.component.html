@@ -1,42 +1,52 @@
+<!-- start: entire comment card  -->
 <article
   class="shadow-md relative block overflow-hidden rounded-lg border border-gray-200 p-4 sm:p-6 lg:p-8"
 >
+  <!-- start: bottom border -->
   <span
     class="absolute inset-x-0 bottom-0 h-2 bg-gradient-to-r from-green-300 via-blue-500 to-purple-600"
-  ></span>
+  >
+  </span>
 
   <div class="sm:flex sm:justify-between sm:gap-4">
+    <!-- start: user name -->
     <div>
       <h3 class="text-lg font-bold text-gray-900 sm:text-xl">
         {{ comment.user.name }}
       </h3>
     </div>
 
-    <div class="hidden sm:block sm:shrink-0">
-      <!-- <img
+    <!-- future feat: user image -->
+    <!-- <div class="hidden sm:block sm:shrink-0">
+      <img
         alt="Paul Clapton"
         src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1180&q=80"
         class="h-16 w-16 rounded-lg object-cover shadow-sm"
-      /> -->
-    </div>
+      />
+    </div> -->
   </div>
 
+  <!-- start: comment text -->
   <div class="mt-4">
     <p class="text-sm text-gray-500">
       {{ comment.text }}
     </p>
   </div>
 
+  <!-- start: buttons  -->
   <dl class="mt-6 flex justify-end gap-4 sm:gap-6">
+    <!-- start: reply button -->
     <button
       (click)="toggleReplying()"
       class="inline-block rounded border border-current px-4 py-1.5 text-sm font-medium text-indigo-600 transition hover:rotate-2 hover:scale-110 focus:outline-none focus:ring active:text-indigo-500"
     >
       Reply
     </button>
+
+    <!-- start: like button -->
     <button>12 Likes</button>
 
-    <!-- expand/collapse -->
+    <!-- start: expand/collapse icon -->
     <button
       (click)="toggleExpanded()"
       class="duration-200"
@@ -58,14 +68,23 @@
       </svg>
     </button>
   </dl>
+
+  <!-- start: reply to existing comment form -->
   <section class="my-4" *ngIf="isReplying()">
-    <app-comment-form></app-comment-form>
+    <app-comment-form
+      (formSubmitted)="createComment($event)"
+      placeholder="Write your reply"
+      buttonText="Send"
+    ></app-comment-form>
   </section>
+
+  <!-- start: nested comments -->
   <section class="nested-comments" *ngIf="isExpanded()">
     <!-- This shows nested comments -->
     <app-comment
+    
       [comment]="nestedComment"
-      *ngFor="let nestedComment of nestedComments()"
+      *ngFor="let nestedComment of nestedComments(); trackBy: commentTrackBy"
     ></app-comment>
   </section>
 </article>
