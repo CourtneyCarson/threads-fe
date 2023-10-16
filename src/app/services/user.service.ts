@@ -9,6 +9,7 @@ import { User } from '../interfaces/user.interface';
 export class UserService {
   http = inject(HttpClient);
   localStorageKey = 'threads-user';
+
   createUser(name: string) {
     return this.http.post<User>(`${enviornment.apiBaseUrl}/users`, { name });
   }
