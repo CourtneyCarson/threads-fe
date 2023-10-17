@@ -22,4 +22,11 @@ export class UserService {
     const user = localStorage.getItem(this.localStorageKey);
     return user ? JSON.parse(user) : null;
   }
+
+  // login user 
+  login(username: string, password: string) {
+    return this.http.post<User>(`${enviornment.apiBaseUrl}/users/login`, { username, password });
+  }
+
+
 }

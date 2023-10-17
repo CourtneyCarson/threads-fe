@@ -1,6 +1,8 @@
 # ThreadsApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.6.
+Full stack MEAN app to create comments, reply to comments, reply to nested comments. 
+
+Backend Repo: https://github.com/CourtneyCarson/threads-api
 
 ## Development server
 
