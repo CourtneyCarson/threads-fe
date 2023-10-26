@@ -1,12 +1,5 @@
 <!-- login form here -->
 
-<!--
-  Heads up! 👋
-
-  Plugins:
-    - @tailwindcss/forms
--->
-
 <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-lg">
     <h1 class="text-center text-2xl font-bold text-indigo-600 sm:text-3xl">
@@ -19,21 +12,23 @@
     </p>
 
     <form
-      action=""
+      [formGroup]="loginForm"
       class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
     >
       <p class="text-center text-lg font-medium">Sign in to your account</p>
 
       <div>
-        <label for="email" class="sr-only">Email</label>
+        <label for="username" class="sr-only">username</label>
 
         <div class="relative">
           <input
-            type="email"
+            formControlName="username"
+            type="username"
             class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
-            placeholder="Enter email"
+            placeholder="Enter username"
           />
 
+          <!-- @icon -->
           <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -58,11 +53,13 @@
 
         <div class="relative">
           <input
+            formControlName="password"
             type="password"
             class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
             placeholder="Enter password"
           />
 
+          <!-- eye icon -->
           <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -87,9 +84,11 @@
           </span>
         </div>
       </div>
-
+      <!-- type="submit" -->
       <button
-        type="submit"
+        (click)="
+          submitLogin()
+        "
         class="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
       >
         Sign in
@@ -97,7 +96,7 @@
 
       <p class="text-center text-sm text-gray-500">
         No account?
-        <a class="underline" href="">Sign up</a>
+        <button class="underline">Sign up</button>
       </p>
     </form>
   </div>

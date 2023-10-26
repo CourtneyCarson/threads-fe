@@ -25,6 +25,7 @@ export class UserService {
 
   // login user 
   login(username: string, password: string) {
+    console.log('login service', username, password);
     return this.http.post<User>(`${enviornment.apiBaseUrl}/users/login`, { username, password });
   }
 
