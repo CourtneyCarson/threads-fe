@@ -19,14 +19,25 @@ export class UserService {
       name,
     });
   }
-  
+
   // for real sign up
   registerUser(name: string, username: string, password: string) {
-    return this.http.post<User>(`${enviornment.apiBaseUrl}/users/register`, {
-      name,
-      username,
-      password,
-    });
+    return this.http
+      .post<User>(`${enviornment.apiBaseUrl}/users/register`, {
+        name,
+        username,
+        password,
+      })
+      .pipe(
+        map((user) => {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem(this.localStorageKey, JSON.stringify(user));
+          if (user) {
+            this.router.navigate(['/home']);
+          }
+          return user;
+        })
+      );
   }
 
   // saveUserToStorage(user: User) {
