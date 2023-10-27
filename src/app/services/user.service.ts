@@ -13,23 +13,34 @@ export class UserService {
   localStorageKey = 'threads-user';
   router = inject(Router);
 
+  // for little test user only, not prod signup
   createUser(name: string) {
-    return this.http.post<User>(`${enviornment.apiBaseUrl}/users`, { name });
+    return this.http.post<User>(`${enviornment.apiBaseUrl}/users`, {
+      name,
+    });
+  }
+  
+  // for real sign up
+  registerUser(name: string, username: string, password: string) {
+    return this.http.post<User>(`${enviornment.apiBaseUrl}/users/register`, {
+      name,
+      username,
+      password,
+    });
   }
 
-  saveUserToStorage(user: User) {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(user));
-  }
+  // saveUserToStorage(user: User) {
+  //   localStorage.setItem(this.localStorageKey, JSON.stringify(user));
+  // }
 
   getUserFromStorage() {
     const user = localStorage.getItem(this.localStorageKey);
-    console.log('user at getuserfromstorage', user);
+    // console.log('user at getuserfromstorage', user);
     return user ? JSON.parse(user) : null;
   }
 
   // login user
   login(username: string, password: string) {
-    console.log('login service', username, password);
     return this.http
       .post<User>(`${enviornment.apiBaseUrl}/users/login`, {
         username,
@@ -39,7 +50,6 @@ export class UserService {
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem(this.localStorageKey, JSON.stringify(user));
-          console.log('user at login after service call');
           if (user) {
             this.router.navigate(['/home']);
           }
@@ -48,8 +58,8 @@ export class UserService {
       );
   }
 
+  // remove user from local storage to log user out
   logout() {
-    // remove user from local storage to log user out
     localStorage.removeItem(this.localStorageKey);
     this.router.navigate(['/login']);
   }

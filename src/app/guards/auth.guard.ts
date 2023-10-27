@@ -1,32 +1,24 @@
-import { CanActivateFn } from '@angular/router';
+import { CanActivateFn, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { inject } from '@angular/core';
 
-export function authGuard(): CanActivateFn  {
-return () => {
-  const authServ: UserService = inject(UserService );
+export function authGuard(): CanActivateFn {
+  return () => {
+    const authServ: UserService = inject(UserService);
+    const router: Router = inject(Router);
 
-  if(authServ.getUserFromStorage()) {
-    console.log('authguard allowed')
-    return true;
-  }
-console.log('authguard blocked')
-  return false;
+    const isUserInStorage = authServ.getUserFromStorage();
 
-};
+    if (isUserInStorage) {
+      console.log('authguard allowed');
+      router.createUrlTree(['/home']);
+      return true;
+    }
+    //  else {
+    // router.createUrlTree(['/login']);
+    router.navigate(['/login']);
+    // }
+    console.log('authguard blocked');
+    return false;
+  };
 }
-
-// 
-
-// check if the user is authenticated
-// if not, redirect to login page
-
-// return () => {
-//     const oauthService: AuthService = inject(AuthService);
-    
-//     if (oauthService.hasAccess() ) {
-//       return true;
-//     }
-//     oauthService.login();
-//     return false;
-//   };
