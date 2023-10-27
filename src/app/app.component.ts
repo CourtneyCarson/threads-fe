@@ -17,13 +17,17 @@ export class AppComponent {
 
   constructor() {
     const user = this.userService.getUserFromStorage();
-    if (!user) {
-      const randomNumber = Math.ceil(Math.random() * 4000 + 1000);
-      const randomName = `user_${randomNumber}`;
-      this.userService.createUser(randomName).subscribe((user) => {
-        console.log('user created', user);
-        this.userService.saveUserToStorage(user);
-      });
-    }
+    // if (!user) {
+    //   const randomNumber = Math.ceil(Math.random() * 4000 + 1000);
+    //   const randomName = `user_${randomNumber}`;
+    //   this.userService.createUser(randomName).subscribe((user) => {
+    //     console.log('user created', user);
+    //     this.userService.saveUserToStorage(user);
+    //   });
+    // }
+  }
+
+  logout() {
+    this.userService.logout();
   }
 }

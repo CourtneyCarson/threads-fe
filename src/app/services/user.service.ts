@@ -21,6 +21,7 @@ export class UserService {
 
   getUserFromStorage() {
     const user = localStorage.getItem(this.localStorageKey);
+    console.log('user at getuserfromstorage', user);
     return user ? JSON.parse(user) : null;
   }
 
@@ -36,25 +37,14 @@ export class UserService {
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem(this.localStorageKey, JSON.stringify(user));
-          // this.userSubject.next(user);
-          console.log('user at login after service call', )
+          console.log('user at login after service call');
           return user;
         })
       );
   }
 
-  //   login(username: string, password: string) {
-  //     return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
-  //         .pipe(map(user => {
-  //             // store user details and jwt token in local storage to keep user logged in between page refreshes
-  //             localStorage.setItem('user', JSON.stringify(user));
-  //             this.userSubject.next(user);
-  //             return user;
-  //         }));
-  // }
-
-  setSession(authResult: any) {
-    localStorage.setItem('authToken', authResult.token);
-    localStorage.setItem('profile', JSON.stringify(authResult.user));
+  logout() {
+    // remove user from local storage to log user out
+    localStorage.removeItem(this.localStorageKey);
   }
 }
