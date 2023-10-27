@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
 // import { HomeComponent } from './home/home.component';
 
 export const routes: Routes = [
@@ -9,6 +10,7 @@ export const routes: Routes = [
   },
   {
     path: 'home',
+    canActivate: [authGuard()],
     //lazy load, if on another page this file will never be loaded
     loadComponent: () =>
       import('./home/home.component').then((m) => m.HomeComponent),
