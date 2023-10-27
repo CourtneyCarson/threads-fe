@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { enviornment } from '../enviornment';
 import { User } from '../interfaces/user.interface';
 import { map } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,7 @@ import { map } from 'rxjs';
 export class UserService {
   http = inject(HttpClient);
   localStorageKey = 'threads-user';
+  router = inject(Router);
 
   createUser(name: string) {
     return this.http.post<User>(`${enviornment.apiBaseUrl}/users`, { name });
@@ -38,6 +40,9 @@ export class UserService {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
           localStorage.setItem(this.localStorageKey, JSON.stringify(user));
           console.log('user at login after service call');
+          if (user) {
+            this.router.navigate(['/home']);
+          }
           return user;
         })
       );
@@ -46,5 +51,6 @@ export class UserService {
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem(this.localStorageKey);
+    this.router.navigate(['/login']);
   }
 }

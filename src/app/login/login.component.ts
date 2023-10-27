@@ -17,10 +17,13 @@ import { UserService } from '../services/user.service';
 })
 export class LoginComponent {
   userService = inject(UserService);
+
   loginForm = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),
   });
+
+  showPassword: boolean = false;
 
   submitLogin() {
     console.log(this.loginForm.value);
@@ -42,10 +45,10 @@ export class LoginComponent {
         console.log('An error occured while logging in', error);
       }
     );
-
-    // catch errors
   }
 
-
-
+  // show password
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
 }
