@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit {
 
   getComments() {
     this.commentService.getComments().subscribe((comments) => {
-      console.log(comments);
       this.comments.set(comments);
     });
   }

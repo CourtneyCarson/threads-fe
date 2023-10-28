@@ -29,7 +29,7 @@ export class CommentComponent {
       this.commentService
         .getComments(this.comment._id)
         .subscribe((comments) => {
-          console.log(comments);
+          // console.log(comments);
           this.nestedComments.set(comments);
         });
     }
@@ -51,7 +51,6 @@ export class CommentComponent {
     const { text } = formValues;
     const user = this.userService.userValue;
 
-    console.log('user', user);
     if (!user) {
       return;
     }

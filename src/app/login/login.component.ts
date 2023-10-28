@@ -27,8 +27,6 @@ export class LoginComponent {
   showPassword: boolean = false;
 
   submitLogin() {
-    console.log(this.loginForm.value);
-
     const formValue = {
       username: this.loginForm.value.username,
       password: this.loginForm.value.password,
