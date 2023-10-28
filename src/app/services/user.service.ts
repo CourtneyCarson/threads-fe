@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { enviornment } from '../enviornment';
 import { User } from '../interfaces/user.interface';
-import { map } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -10,8 +10,16 @@ import { Router } from '@angular/router';
 })
 export class UserService {
   http = inject(HttpClient);
-  localStorageKey = 'threads-user';
+  localStorageKey = 'token';
   router = inject(Router);
+  // userSubject = new BehaviorSubject<User | null>(null);
+  userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
+  user = this.userSubject.asObservable();
+
+  public get userValue() {
+    console.log('when is this hit?', this.userSubject.value);
+    return this.userSubject.value;
+  }
 
   // for little test user only, not prod signup
   createUser(name: string) {
@@ -21,21 +29,54 @@ export class UserService {
   }
 
   // for real sign up
-  registerUser(name: string, username: string, password: string) {
+  // registerUser(name: string, username: string, password: string) {
+  //   return this.http
+  //     .post<User>(`${enviornment.apiBaseUrl}/users/register`, {
+  //       name,
+  //       username,
+  //       password,
+  //     })
+  //     .pipe(
+  //       map((user) => {
+  //         // store user details and jwt token in local storage to keep user logged in between page refreshes
+  //         localStorage.setItem(this.localStorageKey, JSON.stringify(user));
+  //         if (user) {
+  //           this.router.navigate(['/home']);
+  //         }
+  //         console.log('return user at register', user)
+  //         return user;
+  //       })
+  //     );
+  // }
+
+  // register(user: User) {
+  //   return this.http.post(`${enviornment.apiBaseUrl}/users/register`, user);
+  // }
+
+  // above returns the success message, but I need the actual user observable to be returned
+  // for real sign up
+  registerUser(
+    name: string,
+    username: string,
+    password: string
+  ): Observable<User> {
     return this.http
       .post<User>(`${enviornment.apiBaseUrl}/users/register`, {
         name,
         username,
         password,
       })
+
       .pipe(
         map((user) => {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem(this.localStorageKey, JSON.stringify(user));
+          localStorage.setItem('user', JSON.stringify(user));
+          this.userSubject.next(user);
           if (user) {
             this.router.navigate(['/home']);
           }
-          return user;
+          console.log('return user at register', user);
+          return user; // Return the user object as an observable value
         })
       );
   }
@@ -44,11 +85,16 @@ export class UserService {
   //   localStorage.setItem(this.localStorageKey, JSON.stringify(user));
   // }
 
-  getUserFromStorage() {
-    const user = localStorage.getItem(this.localStorageKey);
-    // console.log('user at getuserfromstorage', user);
-    return user ? JSON.parse(user) : null;
-  }
+  // // grab user from local storage
+  // getUserFromStorage() {
+  //   const user = localStorage.getItem(this.localStorageKey);
+  //   console.log('user at getuserfromstorage', user);
+  //   return user ? JSON.parse(user) : null;
+  // }
+
+  // getToken(): string | null {
+  //   return this.token || localStorage.getItem('authToken');
+  // }
 
   // login user
   login(username: string, password: string) {
@@ -59,11 +105,14 @@ export class UserService {
       })
       .pipe(
         map((user) => {
+          console.log('return user at login', user);
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem(this.localStorageKey, JSON.stringify(user));
+          localStorage.setItem('user', JSON.stringify(user));
+          this.userSubject.next(user);
           if (user) {
             this.router.navigate(['/home']);
           }
+
           return user;
         })
       );
@@ -71,7 +120,7 @@ export class UserService {
 
   // remove user from local storage to log user out
   logout() {
-    localStorage.removeItem(this.localStorageKey);
+    localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
 }

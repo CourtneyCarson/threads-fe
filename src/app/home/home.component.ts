@@ -31,14 +31,18 @@ export class HomeComponent implements OnInit {
 
   createComment(formValues: { text: string }) {
     const { text } = formValues;
-    const user = this.userService.getUserFromStorage();
+    // const user = this.userService.getUserFromStorage();
+    const user = this.userService.userValue;
+
+    console.log('user', user)
+
     if (!user) {
       return;
     }
     this.commentService
       .createComment({
         text,
-        userId: user._id,
+        userId: user.user._id,
       })
       .subscribe((createdComment) => {
         this.comments.set([createdComment, ...this.comments()]);
@@ -49,4 +53,33 @@ export class HomeComponent implements OnInit {
   commentTrackBy(index: number, comment: Comment) {
     return comment._id;
   }
+
+  // createComment(formValues: { text: string }) {
+  //   const { text } = formValues;
+  //   // const user = this.userService.getUserFromStorage();
+  //   const user = this.userService.userValue;
+  //   if (!user) {
+  //     return;
+  //   }
+
+  //   const headers = new HttpHeaders({
+  //     Authorization: `Bearer ${user.token}`,
+  //   });
+
+  //   console.log('creating comment', user);
+
+  //   this.commentService
+  //     .createComment(
+  //       {
+  //         text,
+  //         userId: user._id,
+  //       },
+  //       { headers }
+  //     )
+  //     .subscribe((createdComment) => {
+  //       this.comments.set([createdComment, ...this.comments()]);
+  //     });
+  // }
+
+
 }

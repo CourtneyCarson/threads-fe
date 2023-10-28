@@ -6,8 +6,8 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { UserService } from '../services/user.service';
-import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -44,7 +44,7 @@ export class RegisterComponent {
       .registerUser(formValue.name, formValue.username, formValue.password)
       .subscribe(
         (user) => {
-          console.log(user);
+          console.log('in register component', user);
         },
         (error) => {
           console.log('An error occured while logging in', error);

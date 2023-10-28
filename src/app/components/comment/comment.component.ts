@@ -49,14 +49,17 @@ export class CommentComponent {
   // create a reply to a comment
   createComment(formValues: { text: string }) {
     const { text } = formValues;
-    const user = this.userService.getUserFromStorage();
+    // const user = this.userService.getUserFromStorage();
+    const user = this.userService.userValue;
+
+    console.log('user', user);
     if (!user) {
       return;
     }
     this.commentService
       .createComment({
         text,
-        userId: user._id,
+        userId: user.user._id,
         parentId: this.comment._id,
       })
       .subscribe((createdComment) => {
@@ -67,4 +70,35 @@ export class CommentComponent {
   commentTrackBy(index: number, comment: Comment) {
     return comment._id;
   }
+
+
+
+  // create a reply to a comment
+  // createComment(formValues: { text: string }) {
+  //   const { text } = formValues;
+  //   // const user = this.userService.getUserFromStorage();
+  //   const user = this.userService.userValue;
+
+  //   console.log('user', user);
+  //   if (!user) {
+  //     return;
+  //   }
+
+  //   const headers = new HttpHeaders({
+  //     Authorization: `Bearer ${user.token}`, // Assuming your token is stored in user.token
+  //   });
+
+  //   this.commentService
+  //     .createComment(
+  //       {
+  //         text,
+  //         userId: user._id,
+  //         parentId: this.comment._id,
+  //       },
+  //       { headers }) // pass the headers as the second argument to the createComment method
+  //     .subscribe((createdComment) => {
+  //       this.nestedComments.set([createdComment, ...this.nestedComments()]);
+  //     });
+  // }
+
 }

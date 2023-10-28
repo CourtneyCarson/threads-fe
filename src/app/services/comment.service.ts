@@ -25,7 +25,7 @@ export class CommentService {
   }
 
   // get
-  
+
   // create comment
   createComment(params: CreateCommentDto) {
     return this.http.post<Comment>(
