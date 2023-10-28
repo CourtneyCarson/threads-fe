@@ -7,6 +7,7 @@ import { UserService } from './services/user.service';
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterModule],
+
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
@@ -16,14 +17,21 @@ export class AppComponent {
   userService = inject(UserService);
 
   constructor() {
-    const user = this.userService.getUserFromStorage();
-    if (!user) {
-      const randomNumber = Math.ceil(Math.random() * 4000 + 1000);
-      const randomName = `user_${randomNumber}`;
-      this.userService.createUser(randomName).subscribe((user) => {
-        console.log('user created', user);
-        this.userService.saveUserToStorage(user);
-      });
-    }
+    const user = this.userService.userValue;
+    // console.log('user', user);
+
+    // this creates a random user id for the user if not logged in. this is for testing purposes.
+    // if (!user) {
+    //   const randomNumber = Math.ceil(Math.random() * 4000 + 1000);
+    //   const randomName = `user_${randomNumber}`;
+    //   this.userService.createUser(randomName).subscribe((user) => {
+    //     console.log('user created', user);
+    //     this.userService.saveUserToStorage(user);
+    //   });
+    // }
+  }
+
+  logout() {
+    this.userService.logout();
   }
 }

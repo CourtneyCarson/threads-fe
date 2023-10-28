@@ -11,9 +11,12 @@ import { RouterModule } from '@angular/router';
 })
 export class AboutComponent {
   upcoming_features = [
-    { feat: 'Auth JWT Token Login and Signup' },
+    // { feat: 'Auth JWT Token Login and Signup' },
     { feat: 'Google Oauth Login and Signup' },
     { feat: 'Ability To Post Images, Not Just Comments' },
-    { feat: '  Ability To Favorite Posts' },
+    { feat: '  Ability To Like Posts' },
+    { feat: ' Ability To Delete Posts' },
+    { feat: ' Ability To Update User Profile' },
+    { feat: ' Ability To Follow Other Users' },
   ];
 }

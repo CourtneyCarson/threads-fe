@@ -82,7 +82,6 @@
   <section class="nested-comments" *ngIf="isExpanded()">
     <!-- This shows nested comments -->
     <app-comment
-    
       [comment]="nestedComment"
       *ngFor="let nestedComment of nestedComments(); trackBy: commentTrackBy"
     ></app-comment>

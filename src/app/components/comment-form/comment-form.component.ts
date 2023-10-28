@@ -24,7 +24,7 @@ export class CommentFormComponent {
     ) as HTMLTextAreaElement;
     const commentText = textAreaElement.value;
     form.reset();
-    console.log({ commentText });
+    // console.log({ commentText });
     this.formSubmitted.emit({
       text: commentText,
     });

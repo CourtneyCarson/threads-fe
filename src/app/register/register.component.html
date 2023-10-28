@@ -11,10 +11,41 @@
     </p>
 
     <form
-      [formGroup]="loginForm"
+      [formGroup]="registerForm"
       class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
     >
       <p class="text-center text-lg font-medium">Sign in to your account</p>
+
+      <div>
+        <label for="name" class="sr-only">name</label>
+
+        <div class="relative">
+          <input
+            formControlName="name"
+            type="name"
+            class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+            placeholder="Enter name"
+          />
+
+          <!-- @icon -->
+          <span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+              />
+            </svg>
+          </span>
+        </div>
+      </div>
 
       <div>
         <label for="username" class="sr-only">username</label>
@@ -91,25 +122,15 @@
       </div>
       <!-- type="submit" -->
       <button
-        (click)="submitLogin()"
+        (click)="submitregister()"
         class="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
       >
-        Sign in
+        Register
       </button>
 
       <p class="text-center text-sm text-gray-500">
-        No account?
-        <button routerLink="/register" class="underline">Sign up</button>
-
-        <span class="mt-4">
-          <br />
-          <p class="mt-4">
-            Don't feel like signing up? Try the demo account: <br />
-          </p>
-          demo@demo.com
-          <br />
-          Password1234!
-        </span>
+        Already have an account?
+        <button routerLink="/login" class="underline">Login</button>
       </p>
     </form>
   </div>

@@ -29,7 +29,7 @@ export class CommentComponent {
       this.commentService
         .getComments(this.comment._id)
         .subscribe((comments) => {
-          console.log(comments);
+          // console.log(comments);
           this.nestedComments.set(comments);
         });
     }
@@ -49,14 +49,15 @@ export class CommentComponent {
   // create a reply to a comment
   createComment(formValues: { text: string }) {
     const { text } = formValues;
-    const user = this.userService.getUserFromStorage();
+    const user = this.userService.userValue;
+
     if (!user) {
       return;
     }
     this.commentService
       .createComment({
         text,
-        userId: user._id,
+        userId: user.user._id,
         parentId: this.comment._id,
       })
       .subscribe((createdComment) => {
