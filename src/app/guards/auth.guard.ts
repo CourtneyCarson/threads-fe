@@ -7,10 +7,7 @@ export function authGuard(): CanActivateFn {
     const authServ: UserService = inject(UserService);
     const router: Router = inject(Router);
 
-    // const isUserInStorage = authServ.getUserFromStorage();
     const isUserInStorage = authServ.userValue;
-
-    // const user = this.userService.userValue;
 
     if (isUserInStorage) {
       // console.log('authguard allowed');

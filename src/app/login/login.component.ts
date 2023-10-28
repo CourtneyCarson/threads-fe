@@ -40,7 +40,7 @@ export class LoginComponent {
 
     this.userService.login(formValue.username, formValue.password).subscribe(
       (user) => {
-        console.log(user);
+        // console.log(user);
       },
       (error) => {
         console.log('An error occured while logging in', error);

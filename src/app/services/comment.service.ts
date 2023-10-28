@@ -24,8 +24,6 @@ export class CommentService {
     return this.http.get<Comment[]>(url); //returns observable of type comment
   }
 
-  // get
-
   // create comment
   createComment(params: CreateCommentDto) {
     return this.http.post<Comment>(

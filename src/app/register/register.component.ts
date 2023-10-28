@@ -28,8 +28,7 @@ export class RegisterComponent {
   showPassword: boolean = false;
 
   submitregister() {
-    console.log(this.registerForm.value);
-
+    // console.log(this.registerForm.value);
     const formValue = {
       name: this.registerForm.value.name,
       username: this.registerForm.value.username,
@@ -44,7 +43,7 @@ export class RegisterComponent {
       .registerUser(formValue.name, formValue.username, formValue.password)
       .subscribe(
         (user) => {
-          console.log('in register component', user);
+          // console.log('in register component', user);
         },
         (error) => {
           console.log('An error occured while logging in', error);
