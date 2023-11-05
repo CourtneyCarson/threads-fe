@@ -70,7 +70,7 @@
   </dl>
 
   <!-- start: reply to existing comment form -->
-  <section class="my-4" *ngIf="isReplying()">
+  <section class="my-4" *="isReplying()">
     <app-comment-form
       (formSubmitted)="createComment($event)"
       placeholder="Write your reply"
