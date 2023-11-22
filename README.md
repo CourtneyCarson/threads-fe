@@ -1,29 +1,41 @@
-# ThreadsApp
+## User Functionality
 
-Full stack MEAN app to create comments, reply to comments, reply to nested comments. 
+Users can log in with JWT authentication
 
-Backend Repo: https://github.com/CourtneyCarson/threads-api
+Authenticated users can create their own posts
 
-## Development server
+Authenticated users can comment on others posts 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Authenticated users can comment on comments, creating nested comments
 
-## Code scaffolding
+## Front End 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Angular 16: with signals, standalone components, 
 
-## Build
+Typescript
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+TailwindCss
 
-## Running unit tests
+Karma-Jasmine 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+RxJs
 
-## Running end-to-end tests
+Scss
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Back End 
 
-## Further help
+NestJs
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+MongoDB
+
+Upcoming Features
+
+Google Oauth Authentication 
+
+Upload Images when creating a post or comment
+
+Delete posts and comments 
+
+Update user profile
+
+Follow other users
